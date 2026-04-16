@@ -1,0 +1,157 @@
+<div class="container mt-3">
+
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+
+      <div class="card shadow">
+        
+        <!-- Cabeçalho -->
+        <div class="card-header">
+          <h5 class="mb-0">Cadastrar Cliente</h5>
+        </div>
+
+        <!-- Corpo -->
+        <div class="card-body">
+
+          @if(mensagemSucesso() != '')
+          {
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sucesso!</strong> {{ mensagemSucesso() }}
+                <button type="button" class="btn-close" (click)="mensagemSucesso.set('')" aria-label="Close"></button>
+              </div>
+          }
+
+          @if(mensagemErro() != '') 
+          {
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Erro!</strong> {{ mensagemErro() }}
+                <button type="button" class="btn-close" (click)="mensagemErro.set('')" aria-label="Close"></button>
+              </div>
+          }
+
+          <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+
+            <div class="text-danger mb-2">
+              <small>Os campos com * são de preenchimento obrigatório.</small>
+            </div>
+
+            <!-- DADOS PESSOAIS -->
+            <div class="row mb-3">
+
+              <div class="col-md-9">
+                <label for="nome" class="form-label">Nome <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  formControlName="nome"
+                  class="form-control" 
+                  id="nome" 
+                  placeholder="Digite o nome do cliente">
+              </div>
+
+              <div class="col-md-3">
+                <label for="cpf" class="form-label">CPF <span class="text-danger">*</span></label>
+                <input 
+                  type="text" 
+                  formControlName="cpf"
+                  class="form-control" 
+                  id="cpf" 
+                  maxlength="11"
+                  placeholder="Digite o CPF">
+              </div>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- ENDEREÇO -->
+            <h6 class="mb-3">Endereço</h6>
+
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <label class="form-label">CEP <span class="text-danger">*</span></label>
+                <input type="text" formControlName="cep" class="form-control" maxlength="8" (keyup)="buscarCep()"/>
+              </div>
+
+              <div class="col-md-9">
+                <label class="form-label">Logradouro <span class="text-danger">*</span></label>
+                <input type="text" formControlName="logradouro" class="form-control" placeholder="Rua, Avenida, etc"/>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <label class="form-label">Número <span class="text-danger">*</span></label>
+                <input type="text" formControlName="numero" class="form-control"/>
+              </div>
+
+              <div class="col-md-9">
+                <label class="form-label">Complemento <span class="text-danger">*</span></label>
+                <input type="text" formControlName="complemento" class="form-control"/>
+              </div>
+            </div>
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <label class="form-label">Bairro <span class="text-danger">*</span></label>
+                <input type="text" formControlName="bairro" class="form-control"/>
+              </div>
+
+              <div class="col-md-4">
+                <label class="form-label">Cidade <span class="text-danger">*</span></label>
+                <input type="text" formControlName="cidade" class="form-control"/>
+              </div>
+
+              <div class="col-md-2">
+                <label class="form-label">UF <span class="text-danger">*</span></label>
+                <select formControlName="uf" class="form-select">
+                  <option value="">Selecione</option>
+                  <option>AC</option>
+                  <option>AL</option>
+                  <option>AP</option>
+                  <option>AM</option>
+                  <option>BA</option>
+                  <option>CE</option>
+                  <option>DF</option>
+                  <option>ES</option>
+                  <option>GO</option>
+                  <option>MA</option>
+                  <option>MT</option>
+                  <option>MS</option>
+                  <option>MG</option>
+                  <option>PA</option>
+                  <option>PB</option>
+                  <option>PR</option>
+                  <option>PE</option>
+                  <option>PI</option>
+                  <option>RJ</option>
+                  <option>RN</option>
+                  <option>RS</option>
+                  <option>RO</option>
+                  <option>RR</option>
+                  <option>SC</option>
+                  <option>SP</option>
+                  <option>SE</option>
+                  <option>TO</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- BOTÕES -->
+            <div class="mt-4">
+              <button type="reset" class="btn btn-secondary me-2">
+                Limpar
+              </button>
+              <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">
+                Cadastrar Cliente
+              </button>
+            </div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

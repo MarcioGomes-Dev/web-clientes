@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+  <div class="container-fluid">
+
+    <!-- Nome do sistema -->
+    <a class="navbar-brand fw-bold" href="#">
+      WebClientes
+    </a>
+
+    <!-- Botão responsivo -->
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu de navegação -->
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav align-items-center">
+
+        <!-- Link Cadastrar Clientes -->
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/pages/cadastrar-cliente">
+            Cadastrar Clientes
+          </a>
+        </li>
+
+        <!-- Link Consultar Clientes -->
+        <li class="nav-item">
+          <a class="nav-link text-white" routerLink="/pages/consultar-cliente">
+            Consultar Clientes
+          </a>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>

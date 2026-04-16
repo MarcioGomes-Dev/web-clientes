@@ -1,0 +1,105 @@
+<div class="container mt-3">
+
+  <div class="row justify-content-center">
+    <div class="col-md-12">
+
+      <div class="card shadow">
+
+        <!-- Cabeçalho -->
+        <div class="card-header">
+          <h5 class="mb-0">Consultar Clientes</h5>
+        </div>
+
+        <!-- Corpo -->
+        <div class="card-body">
+
+          <!-- Formulário -->
+          <form [formGroup]="formulario" (ngSubmit)="consultar()">
+
+            <div class="row mb-3">
+              <div class="col-md-6">
+                <input type="text" class="form-control" formControlName="nome"
+                  placeholder="Digite o nome do cliente desejado" />
+              </div>
+              <div class="col-md-6">
+                <input type="submit" class="btn btn-success" value="Pesquisar clientes"
+                  [disabled]="formulario.invalid" />
+              </div>
+            </div>
+
+          </form>
+
+          @if(mensagemSucesso() != '')
+          {
+              <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Sucesso!</strong> {{ mensagemSucesso() }}
+                <button type="button" class="btn-close" (click)="mensagemSucesso.set('')" aria-label="Close"></button>
+              </div>
+          }
+
+          @if(mensagemErro() != '') 
+          {
+              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Erro!</strong> {{ mensagemErro() }}
+                <button type="button" class="btn-close" (click)="mensagemErro.set('')" aria-label="Close"></button>
+              </div>
+          }
+
+          @if(clientes().length > 0)
+          {
+              <!-- Tabela -->
+              <div class="table-responsive">
+                <table class="table table-sm table-striped table-hover align-middle">
+
+                  <thead>
+                    <tr>
+                      <th>Nome do Cliente</th>
+                      <th>CPF</th>
+                      <th width="50%">Endereços</th>
+                      <th class="text-center" style="width: 180px;">Ações</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+
+                    @for(c of clientes(); track c.id) {
+                    <tr>
+                      <td>{{ c.nome }}</td>
+                      <td>{{ c.cpf }}</td>
+                      <td>
+
+                        @if(c.enderecos.length == 0){
+                          <div>Não há endereços cadastrados para este cliente.</div>
+                        }
+                        @for(e of c.enderecos; track e.id) {
+                            <div>
+                              {{ e.logradouro }}, {{ e.numero }}, {{ e.complemento }}, {{ e.bairro }}, 
+                              {{ e.cidade }}, {{ e.uf }}, CEP: {{ e.cep }}
+                            </div>
+                        }
+                      </td>
+                      <td>
+                        <button class="btn btn-sm btn-outline-primary me-1">
+                          Editar
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger me-1" (click)="excluir(c.id)">
+                          Excluir
+                        </button>
+                      </td>
+                    </tr>
+                    }
+
+                  </tbody>
+
+                </table>
+              </div>
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
